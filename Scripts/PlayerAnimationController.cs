@@ -10,7 +10,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     [Header("Animation Settings")]
     [Range(0f, 1f)]
-    public float idleDelay = 0.5f; // Delay for idle animation
+    public float idleDelay = 0.4f; // Delay for idle animation
     [Range(0f, 1f)]
     public float runDelay = 0.2f; // Delay for running animation
 
