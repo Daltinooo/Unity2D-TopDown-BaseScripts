@@ -3,8 +3,9 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     public GameObject bulletPrefab; // The bullet that this gun shoots
-    public float fireRate; // The rate at which this gun can fire at
-    public float orbitSpeed; // The speed at which the gun rotates towards the mouse
+    [Range(0.1f, 1f)]
+    public float fireRate = 1; // The rate at which this gun can fire at
+    private float orbitSpeed = 10f; // The speed at which the gun rotates towards the mouse
 
     public bool rotatesAroundPlayer = false; // Whether the gun rotates around the player or not
 
