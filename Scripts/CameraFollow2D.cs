@@ -6,7 +6,7 @@ public class CameraFollow : MonoBehaviour
 
     [Space(5)]
 
-    [Range(0, 5)]
+    [Range(0, 10)]
     public float smoothSpeed = 5f; // How smoothly the camera catches up to its target
 
     void LateUpdate()
