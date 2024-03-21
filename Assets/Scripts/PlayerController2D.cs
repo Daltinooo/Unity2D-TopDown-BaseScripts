@@ -2,59 +2,51 @@ using UnityEngine;
 
 public class PlayerController2D : MonoBehaviour
 {
-    public float speed = 5.0f;
-
+    [Header("Movement Settings")]
+    public float speed = 5.0f; // Public so can be changed later
+    
     void Update()
     {
-        // Declair variables that use built in input for both axis
-        float moveHorizontal = Input.GetAxisRaw("Horizontal");
-        float moveVertical = Input.GetAxisRaw("Vertical");
+        float moveHorizontal = Input.GetAxisRaw("Horizontal"); // get input for horizontal movement
+        float moveVertical = Input.GetAxisRaw("Vertical"); // get input for vertical movement
 
-        // Normalize the direction vector so that horizontal movement is not faster
-        Vector3 direction = new Vector3(moveHorizontal, moveVertical, 0).normalized;
+        Vector3 direction = new Vector3(moveHorizontal, moveVertical, 0).normalized; // create a direction vector from the input and normalize it
 
-        //Move the player
-        transform.position += direction * speed * Time.deltaTime;
+        transform.position += direction * speed * Time.deltaTime; // move the player in the direction of the input
 
-        // Rotate the player so that it faces the direction of movement
-        if (direction != Vector3.zero)
+        // diagonal movement
+        if (direction!= Vector3.zero)
         {
-            // Only rotate the player when moving diagonally
-            if (moveHorizontal != 0 && moveVertical != 0)
+            if (moveHorizontal != 0 && moveVertical != 0) // if the player is moving diagonally
             {
-                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                angle = Mathf.Round(angle / 45) * 45; // Lock the angle to the nearest 45 degrees
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // calculate the angle of the direction
+                angle = Mathf.Round(angle / 45) * 45; // round the angle to the nearest 45 degrees
 
-                // Adjust the angle based on the direction of horizontal movement
-
-                // Adjust for -x, -y movement
-                if (moveHorizontal < 0 && moveVertical < 0)
+                if (moveHorizontal < 0 && moveVertical < 0) // correct the angle for -x,-y movement
                 {
                     angle = -angle - 90;
                 }
-                // Adjust for -x, y movement
-                if (moveHorizontal < 0 && moveVertical > 0)
+                if (moveHorizontal < 0 && moveVertical > 0) // correct the angle for -x,+y movement
                 {
                     angle = -angle + 90;
                 }
 
-                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); // rotate the player to face the direction
             }
             else
             {
-                // Keep the player upright when moving vertically or horizontally
-                transform.rotation = Quaternion.identity;
+                transform.rotation = Quaternion.identity; // if the player is not moving diagonally, reset the rotation
             }
         }
 
-        //Reflect the sprite to face the direction of movement
+        // Flip the player sprite to face the direction of movement
         if (moveHorizontal > 0)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(1, 1, 1); // flip the player sprite to face right
         }
-        else if (moveHorizontal < 0)
+        if (moveHorizontal < 0)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-1, 1, 1); // flip the player sprite to face left
         }
     }
 }
