@@ -41,8 +41,8 @@ public class Gun : MonoBehaviour
         // Calculate the direction from the player to the mouse
         Vector3 directionToMouse = mousePosition - player.transform.position;
 
-        // Calculate the angle from the player to the mouse when inital angle is -90
-        float angle = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg - 90f;
+        // Calculate the angle from the player to the mouse
+        float angle = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
 
         // Calculate the shortest direction to rotate
         float shortestAngle = Mathf.DeltaAngle(transform.eulerAngles.z, angle);
